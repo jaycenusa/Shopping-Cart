@@ -16,6 +16,25 @@ const CartPage = ({cart, adjustQuantity}) => {
             </div>
         )
     }
+
+    return (
+        <div className="text-black bg-[#F9F8F8] px-6 py-10 mb-10 h-screen">
+        <h1 className="mb-6 text-4xl font-extrabold">Shopping Cart</h1>
+            <div className="flex gap-4 flex-wrap justify-center items-start">
+                <div className="min-w-[65%] rounded-xl grow border bg-white border-[#F1DFE4]">
+                    <div className="flex gap-2 justify-between border-b w-full p-4 bg-[#F9F9FE] border-[#F1DFE4] font-bold">
+                    <p className="w-[45%]">Product</p>
+                    <p className="flex-1">Price</p>
+                    <p className="flex-1">Quantity</p>
+                    <p className="flex-1">Actions</p>
+                </div>
+                {cart.map((item) => 
+                    <Item key={item.id} item={item} adjustQuantity={adjustQuantity}/>)}
+            </div>
+            <Checkout cart={cart}/>
+            </div>
+        </div>
+    )
 }
 
 export default CartPage;

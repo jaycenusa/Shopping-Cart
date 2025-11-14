@@ -31,13 +31,14 @@ function App() {
     });
   }, []);
 
-  const adjustQuantity = useCallback((itemId, newQuantity) => {
+  const adjustQuantity = useCallback((item, newQuantity) => {
+    const existingCalculation = (item.quantity || 1) + newQuantity;
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
-        cartItem.id === itemId
-          ? { ...cartItem, quantity: newQuantity }
+        cartItem.id === item.id
+          ? { ...cartItem, quantity: existingCalculation }
           : cartItem
-      )
+      ).filter(cartItem => cartItem.quantity > 0) // Remove items with quantity 0 or less
     );
   }, []);
   
