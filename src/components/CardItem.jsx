@@ -6,7 +6,6 @@ export default function CardItem({item, updateCart}) {
 
     const handleIncrement = () => {
         setQuantity((prev) => {
-            console.log('Incrementing quantity from ', prev);
             return prev + 1
         });
     };
@@ -16,7 +15,6 @@ export default function CardItem({item, updateCart}) {
     };
 
     const handleQuantityChange = (e) => {
-        console.log('Changing quantity ', e.target.value);
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value > 0) {
             setQuantity(value);

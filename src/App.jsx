@@ -6,7 +6,6 @@ function App() {
   const [cart, setCart] = useState([]);
   
   const handleAddToCart = useCallback((item, quantity) => {
-    console.log("handle add to cart");
     setCart((prevCart) => {
       // Check if item already exists in cart
       const existingItemIndex = prevCart.findIndex(
@@ -16,7 +15,6 @@ function App() {
       // If it exists, update the quantity
       if (existingItemIndex !== -1) {
         const updatedCart = [...prevCart];
-        console.log('UpdatedCart before update: ', updatedCart[existingItemIndex]);
         updatedCart[existingItemIndex].quantity += quantity;
         return updatedCart;
 

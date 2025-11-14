@@ -1,5 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+const Item = ({item}) => {
+  return (
+    <div className="flex gap-2 justify-between p-2 border-b border-[#F1DFE4]">
+      <div className="w-[45%] flex gap-2 justify-start items-center">
+        <div className="bg-[#EC7B95] p-2 rounded">
+          <img src={itemimage} className="h-16 w-16 object-contain"/>
+        </div>
+        <div className="max-w-[120px]">
+          <p className="text-center font-bold text-xl truncate">{item.title}</p>
+          <p className="text-[#ABA7A8]">${item.price} each</p>
+        </div>
+      </div>
+      <div className="flex-1 flex gap-2 justify-start items-center font-bold text-lg">${item.price * item.qty}</div>
+      <div className="flex-1 flex gap-2 justify-start items-center">
+        <QuantitySelector quantity={item.qty} product={item} adjustQty={adjustQty}/>
+      </div>
+      <div onClick={() => adjustQty(item.id, -item.qty)} className="flex-1 flex gap-2 justify-start items-center cursor-pointer">
+        <Trash className="w-5 h-5 text-red-600 "/>
+        Delete
+      </div>
+    </div>
+  )
+}
+
 const Checkout = () => {
     const [open, setOpen] = useState(false);
   
@@ -12,7 +37,7 @@ const Checkout = () => {
       {/* <BasicModal open={open} onClose={() => setOpen(false)} /> */}
       <p className="text-xl font-bold">Order Summary</p>
       <div className="flex justify-between mb-4 mt-4">
-        <p className="text-[#686163] ">Subtotal</p>
+        <p className="text-[#705f64] ">Subtotal</p>
         <p className="text-[#686163] ">0</p>
       </div>
       <div className="flex justify-between mb-4">
