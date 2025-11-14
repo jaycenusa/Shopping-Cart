@@ -15,7 +15,7 @@ const Page = ({cart, updateCart, adjustQuantity}) => {
         { page === 'shop' ? 
           <ShopPage updateCart={updateCart}/>: 
           page === 'cart' ?  
-          <CartPage updateCart={updateCart} adjustQuantity={adjustQuantity}/> : 
+          <CartPage cart={cart} adjustQuantity={adjustQuantity}/> : 
           <HomePage /> }
       </>
     )

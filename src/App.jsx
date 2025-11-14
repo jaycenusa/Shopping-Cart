@@ -6,7 +6,6 @@ function App() {
   const [cart, setCart] = useState([]);
   
   const handleAddToCart = useCallback((item, quantity) => {
-    console.log("handle add to cart");
     setCart((prevCart) => {
       // Check if item already exists in cart
       const existingItemIndex = prevCart.findIndex(
@@ -16,7 +15,6 @@ function App() {
       // If it exists, update the quantity
       if (existingItemIndex !== -1) {
         const updatedCart = [...prevCart];
-        console.log('UpdatedCart before update: ', updatedCart[existingItemIndex]);
         updatedCart[existingItemIndex].quantity += quantity;
         return updatedCart;
 
@@ -33,13 +31,14 @@ function App() {
     });
   }, []);
 
-  const adjustQuantity = useCallback((itemId, newQuantity) => {
+  const adjustQuantity = useCallback((item, newQuantity) => {
+    const existingCalculation = (item.quantity || 1) + newQuantity;
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
-        cartItem.id === itemId
-          ? { ...cartItem, quantity: newQuantity }
+        cartItem.id === item.id
+          ? { ...cartItem, quantity: existingCalculation }
           : cartItem
-      )
+      ).filter(cartItem => cartItem.quantity > 0) // Remove items with quantity 0 or less
     );
   }, []);
   
